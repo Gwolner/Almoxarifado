@@ -10,6 +10,15 @@ A vantagem do servlet: ele tem a mplementação de concorrencia, ou seja, se dua
 
 Geralmente essa respsota é HTML ou um texto e não JSP. Embora vejamos o JSP como uma página HTML, o que ocorre é que o JSP é convertido para servlet, que será o que o servidor irá ler.
 
+Pasta WEB-INF e META-INF são protegidas, ou seja, qualquer arquivo que se dispor ali dentro, não será acessivel para nenhuma parte da aplicação via chamada direta (redirecionamento, encaminhamento, view, etc).
+
+O HttpServlet é a implementação do Servlet para Http. é  um protocolo de camada de aplicação, o que significa que é um protocolo cliente-servidor, onde o servidor detem todo conteudo e o cliente faz requisição a esse conteúdo, tanto equisições pedindo quanto enviando informaçoes para que o servidor trate.
+
+Inicialmente o servlet é usado so pra tratar requisição Get e Post, porém o http possui outras como o Put e Delete, que hoje tem mais sentido que antigamente (o post pra fzer cadastro e o get pra rcuperar informação), porem com os novos métodos de desenvolviemnto, usa-se todas as palavras do http. Tanto put quanto o delete.
+
+O método proccessRequest é atnder a qualquer tipo de requisição que apareça, tanto get quanto post, mas não faz mais sentido nos dias atuais, pois dessa forma, so get e post, era criado um servlet pra tudo (servlet de cadastro, servlet de alteração, servlet de deleção) e isto não faz sentido, pois deve-se usar as paalvras do http.
+
+
 
 
 ## Playlist das aulas
