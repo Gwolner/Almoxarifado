@@ -5,6 +5,8 @@
  */
 package br.recife.edu.ifpe.controller.servlets;
 
+import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -25,6 +27,20 @@ public class ProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     /**
@@ -38,6 +54,36 @@ public class ProdutoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        String nome = request.getParameter("nome");
+        String marca = request.getParameter("marca");
+        String categoria = request.getParameter("categoria");
+        String descricao = request.getParameter("descricao");
+        
+        Produto p = new Produto();
+        p.setCodigo(codigo);
+        p.setNome(nome);
+        p.setMarca(marca);
+        p.setCategoria(categoria);
+        p.setDescricao(descricao);
+        
+        RepositorioProdutos.getCurrentInstance().create(p);
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet NewServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>O prodfuto " + p.getNome() + " foi cadastrado com sucesso!</h1>");
+            out.println("<a href=\"index.html\">Home</a>");
+            out.println("</body>");
+            out.println("</html>");
+        }        
     }
 
     /**
@@ -60,6 +106,6 @@ public class ProdutoServlet extends HttpServlet {
         super.doDelete(req, resp); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+   
 
 }
