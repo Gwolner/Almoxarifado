@@ -63,6 +63,7 @@ public class ProdutoServlet extends HttpServlet {
         String descricao = request.getParameter("descricao");
         
         Produto p = new Produto();
+        
         p.setCodigo(codigo);
         p.setNome(nome);
         p.setMarca(marca);
