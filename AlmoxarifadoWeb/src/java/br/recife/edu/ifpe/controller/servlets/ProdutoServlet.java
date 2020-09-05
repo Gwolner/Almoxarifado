@@ -30,8 +30,36 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String atualizar = request.getParameter("atualizar");
+        String deletar = request.getParameter("deletar");
         String codeAux = request.getParameter("codigo");
 
+        if(deletar != null){
+            
+            int codigo = Integer.parseInt(codeAux);
+            
+            Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
+            
+            RepositorioProdutos.getCurrentInstance().delete(p);
+            
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet NewServlet</title>");
+                out.println("</head>");
+                out.println("<body>");               
+                out.println("<h1>O produto " + p.getNome() + " foi deletado com sucesso!</h1>");              
+                out.println("<a href=\"ProdutoServlet\">Produtos</a><br>");
+                out.println("<a href=\"cadastroproduto.html\">Novo produto</a><br>");
+                out.println("<a href=\"index.html\">Home</a>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        }
+        
+        
         if (atualizar != null) {
 
             int codigo = Integer.parseInt(codeAux);
@@ -69,7 +97,7 @@ public class ProdutoServlet extends HttpServlet {
             }
         }
 
-        if (codeAux == null && atualizar == null) {
+        if (codeAux == null && atualizar == null && deletar == null) {
 
             List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
 
@@ -83,7 +111,7 @@ public class ProdutoServlet extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Produto Cadastrados</h1>");
-                out.println("<a href=\"index.html\"> << Voltar</a>");
+                out.println("<a href=\"index.html\">Home</a>");
                 out.println("<a href=\"cadastroproduto.html\">Novo produto</a><br><br>");
                 out.println("<table border=\"1\">");
                 out.println("<tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Operações</th></tr>");
@@ -94,11 +122,12 @@ public class ProdutoServlet extends HttpServlet {
                     out.println("<td>" + p.getMarca() + "</td>");
                     out.println("<td>" + p.getCategoria() + "</td>");
                     out.println("<td><a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "\">Visualizar </a>"
-                            + "<a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "&atualizar=1\"> Atualizar <a></td>");
+                            + "<a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "&atualizar=1\">Atualizar <a>"
+                            + "<a href=\"ProdutoServlet?codigo=" + p.getCodigo() + "&deletar=1\">Deletar<a></td>");
                     out.println("</tr>");
                 }
                 out.println("</table><br>");
-                out.println("<a href=\"index.html\"> << Voltar</a>");
+                out.println("<a href=\"index.html\">Home</a>");
                 out.println("</body>");
                 out.println("</html>");
             }
