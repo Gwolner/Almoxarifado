@@ -5,10 +5,13 @@
  */
 package br.recife.edu.ifpe.controller.servlets;
 
+import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,18 +31,65 @@ public class ProdutoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet NewServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String codeAux = request.getParameter("codigo");
+        
+        if(codeAux == null){
+           
+            List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
+            
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet NewServlet</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Produto Cadastrados</h1>");
+                out.println("<a href=\"index.html\"> << Home</a><br><br>");
+                out.println("<table border=\"1\">");
+                out.println("<tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th></tr>");
+                for(Produto p: produtos){
+                    out.println("<tr>");
+                    out.println("<td>" + p.getCodigo() + "</td>");
+                    out.println("<td>" + p.getNome()+ "</td>");
+                    out.println("<td>" + p.getMarca()+ "</td>");
+                    out.println("<td>" + p.getCategoria()+ "</td>");
+                    out.println("</tr>");
+                }
+                out.println("</table><br>");
+                out.println("<a href=\"index.html\"> << Home</a>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+            
+        }else{
+                
+            int codigo = Integer.parseInt(codeAux);
+
+            Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
+
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<meta charset=\"UTF-8\">");
+                out.println("<title>Servlet NewServlet</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>Produto Recuperado</h1>");
+                out.println("<a href=\"index.html\"> << Home</a><br><br>");
+                out.println("Código: " + p.getCodigo() + "<br>");
+                out.println("Nome: " + p.getNome() + "<br>");
+                out.println("Marca: " + p.getMarca()+ "<br>");
+                out.println("Categoria: " + p.getCategoria()+ "<br>");
+                out.println("Descrição: " + p.getDescricao()+ "<br>");                
+                out.println("</body>");
+                out.println("</html>");
+            }
         }
     }
 
@@ -72,6 +122,13 @@ public class ProdutoServlet extends HttpServlet {
         
         RepositorioProdutos.getCurrentInstance().create(p);
         
+        ItemEstoque item = new ItemEstoque();
+        item.setProduto(p);
+        item.setQuantidade(0);
+        item.setCodigo(p.getCodigo());
+        
+        RepositorioEstoque.getCurrentInstance().read().addItem(item);
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -80,8 +137,9 @@ public class ProdutoServlet extends HttpServlet {
             out.println("<title>Servlet NewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>O prodfuto " + p.getNome() + " foi cadastrado com sucesso!</h1>");
-            out.println("<a href=\"index.html\">Home</a>");
+            out.println("<h1>O produto " + p.getNome() + " foi cadastrado com sucesso!</h1>");
+            out.println("<a href=\"index.html\"> << Home</a><br>");
+            out.println("<a href=\"cadastroproduto.html\">Cadastrar produto</a>");
             out.println("</body>");
             out.println("</html>");
         }        
