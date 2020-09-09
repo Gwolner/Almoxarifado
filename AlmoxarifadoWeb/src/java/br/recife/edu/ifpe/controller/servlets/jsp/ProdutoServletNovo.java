@@ -24,7 +24,8 @@ public class ProdutoServletNovo extends HttpServlet {
             throws ServletException, IOException {
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        String redirect = request.getParameter("redirect");
+        //String redirect = request.getParameter("redirect"); 
+        //Quem vai ler esse rdirect é a página de cadastro ou de visualzição!
         
         Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
         
@@ -44,6 +45,8 @@ public class ProdutoServletNovo extends HttpServlet {
         String categoria = request.getParameter("categoria");
         String descricao = request.getParameter("descricao");
         
+        String a = request.getParameter("atualizar");
+        
         Produto p = new Produto();
         
         p.setCodigo(codigo);
@@ -52,23 +55,45 @@ public class ProdutoServletNovo extends HttpServlet {
         p.setCategoria(categoria);
         p.setDescricao(descricao);
         
-        RepositorioProdutos.getCurrentInstance().create(p);
-        
-        ItemEstoque item = new ItemEstoque();
-        item.setProduto(p);
-        item.setQuantidade(0);
-        item.setCodigo(p.getCodigo());
-
-        RepositorioEstoque.getCurrentInstance().read().addItem(item);
-        
         HttpSession session = request.getSession();
         
-        session.setAttribute("msg", "Produto " + p.getNome() + " cadastrado com sucesso!");
+        if(a == null){
+            RepositorioProdutos.getCurrentInstance().create(p);
+
+            ItemEstoque item = new ItemEstoque();
+            item.setProduto(p);
+            item.setQuantidade(0);
+            item.setCodigo(p.getCodigo());
+
+            RepositorioEstoque.getCurrentInstance().read().addItem(item);
+
+            session.setAttribute("msg", "Produto " + p.getNome() + " cadastrado com sucesso!");
+        }else{
+            RepositorioProdutos.getCurrentInstance().update(p);
         
+            session.setAttribute("msg", "Produto " + p.getNome() + " atualizado com sucesso!");
+        }
         response.sendRedirect("produto.jsp");
     }
 
-  
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        super.doDelete(request, response);
+        
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        
+        Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
+        
+        RepositorioProdutos.getCurrentInstance().delete(p);
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("msg", "O produto "+p.getNome()+" foi deletado!");
+        
+    }
+
+    
+    
     @Override
     public String getServletInfo() {
         return "Short description";

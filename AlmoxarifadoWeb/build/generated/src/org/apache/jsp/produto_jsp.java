@@ -77,6 +77,7 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \n");
       out.write("        ");
 
+            session.removeAttribute("msg");
         }
         
       out.write("\n");
@@ -101,13 +102,29 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \n");
       out.write("        <form method=\"post\" action=\"ProdutoServletNovo\">\n");
       out.write("            \n");
-      out.write("            Código: <input type=\"text\" name=\"codigo\"><br>\n");
-      out.write("            Nome: <input type=\"text\" name=\"nome\"><br>\n");
-      out.write("            Marca: <input type=\"text\" name=\"marca\"><br>\n");
-      out.write("            Categoria: <input type=\"text\" name=\"categoria\"><br>\n");
-      out.write("            Descrição: <textarea name=\"descricao\"></textarea><br><br>\n");
+      out.write("            Código: <input type=\"text\" name=\"codigo\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?produto.codigo:\"\"}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br>\n");
+      out.write("            Nome: <input type=\"text\" name=\"nome\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?produto.nome:''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br>\n");
+      out.write("            Marca: <input type=\"text\" name=\"marca\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?produto.marca:''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br>\n");
+      out.write("            Categoria: <input type=\"text\" name=\"categoria\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?produto.categoria:''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br>\n");
+      out.write("            Descrição: <textarea name=\"descricao\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?produto.descricao:''}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</textarea><br><br>\n");
       out.write("            \n");
-      out.write("            <input type=\"submit\" value=\"Cadastrar\">\n");
+      out.write("            <input type=\"hidden\" name=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?'atualizar':'cadastrar'}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\" value=\"1\">         \n");
+      out.write("                    \n");
+      out.write("            <input type=\"submit\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?'Atualizar':'Cadastrar'}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\">\n");
       out.write("        </form> \n");
       out.write("    </body>\n");
       out.write("</html>\n");
@@ -208,10 +225,17 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</td>\n");
       out.write("                    <td>");
       out.print( p.getCategoria());
-      out.write("</td>\n");
+      out.write("</td> <!-- Trocar nome visualziar, alterar e deletar por ícones -->\n");
       out.write("                    <td><a href=\"ProdutoServletNovo?codigo=");
       out.print( p.getCodigo() );
-      out.write("&redirect=visualiza\">Visualizar </a></td>\n");
+      out.write("&redirect=visualiza\">Visualizar </a>\n");
+      out.write("                        <a href=\"ProdutoServletNovo?codigo=");
+      out.print( p.getCodigo() );
+      out.write("&redirect=atualiza\"> Alterar </a>\n");
+      out.write("                        <a href=\"#\" onclick=\"deleteProduto(");
+      out.print( p.getCodigo() );
+      out.write(")\">Deletar</a>\n");
+      out.write("                    </td>\n");
       out.write("                </tr>\n");
       out.write("            ");
 
@@ -260,6 +284,13 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            function modalopen(){\n");
       out.write("                document.body.appendChild(modal);\n");
       out.write("            }\n");
+      out.write("            \n");
+      out.write("            function deleteProduto(codigo){\n");
+      out.write("                fetch(\"ProdutoServletNovo?codigo=\"+codigo,{method:\"delete\"})\n");
+      out.write("                        .then(function(response){\n");
+      out.write("                            location.reload();\n");
+      out.write("                });\n");
+      out.write("            };\n");
       out.write("            \n");
       out.write("        </script>       \n");
       out.write("    </body>\n");

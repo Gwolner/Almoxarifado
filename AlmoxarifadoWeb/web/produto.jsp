@@ -19,6 +19,7 @@
             <h2><%= mensagem %></h2>
         
         <%
+            session.removeAttribute("msg");
         }
         %>
         
@@ -55,8 +56,11 @@
                     <td><%= p.getCodigo() %></td>
                     <td><%= p.getNome()%></td>
                     <td><%= p.getMarca()%></td>
-                    <td><%= p.getCategoria()%></td>
-                    <td><a href="ProdutoServletNovo?codigo=<%= p.getCodigo() %>&redirect=visualiza">Visualizar </a></td>
+                    <td><%= p.getCategoria()%></td> <!-- Trocar nome visualziar, alterar e deletar por ícones -->
+                    <td><a href="ProdutoServletNovo?codigo=<%= p.getCodigo() %>&redirect=visualiza">Visualizar </a>
+                        <a href="ProdutoServletNovo?codigo=<%= p.getCodigo() %>&redirect=atualiza"> Alterar </a>
+                        <a href="#" onclick="deleteProduto(<%= p.getCodigo() %>)">Deletar</a>
+                    </td>
                 </tr>
             <%
             }
@@ -95,6 +99,13 @@
             function modalopen(){
                 document.body.appendChild(modal);
             }
+            
+            function deleteProduto(codigo){
+                fetch("ProdutoServletNovo?codigo="+codigo,{method:"delete"})
+                        .then(function(response){
+                            location.reload();
+                });
+            };
             
         </script>       
     </body>

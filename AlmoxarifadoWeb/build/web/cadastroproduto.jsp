@@ -18,13 +18,15 @@
         
         <form method="post" action="ProdutoServletNovo">
             
-            Código: <input type="text" name="codigo"><br>
-            Nome: <input type="text" name="nome"><br>
-            Marca: <input type="text" name="marca"><br>
-            Categoria: <input type="text" name="categoria"><br>
-            Descrição: <textarea name="descricao"></textarea><br><br>
+            Código: <input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:""}"><br>
+            Nome: <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.nome:''}"><br>
+            Marca: <input type="text" name="marca" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.marca:''}"><br>
+            Categoria: <input type="text" name="categoria" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.categoria:''}"><br>
+            Descrição: <textarea name="descricao">${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.descricao:''}</textarea><br><br>
             
-            <input type="submit" value="Cadastrar">
+            <input type="hidden" name="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}" value="1">         
+                    
+            <input type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualizar':'Cadastrar'}">
         </form> 
     </body>
 </html>
