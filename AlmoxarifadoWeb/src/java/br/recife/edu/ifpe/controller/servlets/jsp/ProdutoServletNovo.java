@@ -5,7 +5,6 @@ import br.recife.edu.ifpe.model.classes.Produto;
 import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,7 @@ public class ProdutoServletNovo extends HttpServlet {
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
         //String redirect = request.getParameter("redirect"); 
-        //Quem vai ler esse rdirect é a página de cadastro ou de visualzição!
+        //Quem vai ler esse redirect é a página de cadastro ou de visualzição!
         
         Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
         
@@ -78,18 +77,16 @@ public class ProdutoServletNovo extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doDelete(request, response);
+        super.doDelete(request, response);        
         
         int codigo = Integer.parseInt(request.getParameter("codigo"));
+        HttpSession session = request.getSession();
         
         Produto p = RepositorioProdutos.getCurrentInstance().read(codigo);
         
-        RepositorioProdutos.getCurrentInstance().delete(p);
-        
-        HttpSession session = request.getSession();
-        
         session.setAttribute("msg", "O produto "+p.getNome()+" foi deletado!");
         
+        RepositorioProdutos.getCurrentInstance().delete(p);
     }
 
     

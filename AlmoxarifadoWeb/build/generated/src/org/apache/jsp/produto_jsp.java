@@ -66,18 +66,10 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        \n");
       out.write("        ");
 
-        String mensagem = (String) session.getAttribute("msg");
+        String mensagem = (String) session.getAttribute("msg");        
         if(mensagem != null){
-        
-      out.write("\n");
-      out.write("        \n");
-      out.write("            <h2>");
-      out.print( mensagem );
-      out.write("</h2>\n");
-      out.write("        \n");
-      out.write("        ");
-
-            session.removeAttribute("msg");
+            out.println("<h2>"+mensagem+"</h2>");
+            //session.removeAttribute("msg");
         }
         
       out.write("\n");
@@ -123,7 +115,7 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\" value=\"1\">         \n");
       out.write("                    \n");
       out.write("            <input type=\"submit\" value=\"");
-      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?'Atualizar':'Cadastrar'}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${(param.redirect != null && param[\"redirect\"] eq 'atualiza')?'atualizar':'cadastrar'}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("\">\n");
       out.write("        </form> \n");
       out.write("    </body>\n");
@@ -261,14 +253,19 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                document.body.removeChild(modal);\n");
       out.write("                document.body.removeChild(modal2);\n");
+      out.write("                \n");
       out.write("            ");
  }else if(redirect.equals("visualiza")){ 
       out.write("\n");
+      out.write("                \n");
       out.write("                document.body.removeChild(modal);\n");
+      out.write("                \n");
       out.write("            ");
  }else{ 
       out.write("\n");
+      out.write("                \n");
       out.write("                document.body.removeChild(modal2); \n");
+      out.write("                \n");
       out.write("            ");
  } 
       out.write("\n");
@@ -285,8 +282,8 @@ public final class produto_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                document.body.appendChild(modal);\n");
       out.write("            }\n");
       out.write("            \n");
-      out.write("            function deleteProduto(codigo){\n");
-      out.write("                fetch(\"ProdutoServletNovo?codigo=\"+codigo,{method:\"delete\"})\n");
+      out.write("            function deleteProduto(codigo){                \n");
+      out.write("                fetch(\"ProdutoServletNovo?codigo=\"+codigo,{method:'delete'})\n");
       out.write("                        .then(function(response){\n");
       out.write("                            location.reload();\n");
       out.write("                });\n");

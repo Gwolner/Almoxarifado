@@ -12,14 +12,10 @@
         <h1>Produtos cadastrados</h1>
         
         <%
-        String mensagem = (String) session.getAttribute("msg");
+        String mensagem = (String) session.getAttribute("msg");        
         if(mensagem != null){
-        %>
-        
-            <h2><%= mensagem %></h2>
-        
-        <%
-            session.removeAttribute("msg");
+            out.println("<h2>"+mensagem+"</h2>");
+            //session.removeAttribute("msg");
         }
         %>
         
@@ -82,10 +78,15 @@
             %>
                 document.body.removeChild(modal);
                 document.body.removeChild(modal2);
+                
             <% }else if(redirect.equals("visualiza")){ %>
+                
                 document.body.removeChild(modal);
+                
             <% }else{ %>
+                
                 document.body.removeChild(modal2); 
+                
             <% } %>
             
             function modalclose(){
@@ -100,8 +101,8 @@
                 document.body.appendChild(modal);
             }
             
-            function deleteProduto(codigo){
-                fetch("ProdutoServletNovo?codigo="+codigo,{method:"delete"})
+            function deleteProduto(codigo){                
+                fetch("ProdutoServletNovo?codigo="+codigo,{method:'delete'})
                         .then(function(response){
                             location.reload();
                 });

@@ -26,7 +26,7 @@
             
             <input type="hidden" name="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}" value="1">         
                     
-            <input type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualizar':'Cadastrar'}">
+            <input type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}">
         </form> 
     </body>
 </html>
