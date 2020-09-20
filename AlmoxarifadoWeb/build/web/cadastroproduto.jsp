@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cadastroproduto
-    Created on : 06/09/2020, 19:55:36
-    Author     : Wolf
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

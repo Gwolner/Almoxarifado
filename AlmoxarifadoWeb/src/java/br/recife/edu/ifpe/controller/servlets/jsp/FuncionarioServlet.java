@@ -1,14 +1,9 @@
 package br.recife.edu.ifpe.controller.servlets.jsp;
 
 import br.recife.edu.ifpe.model.classes.Funcionario;
-import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.LoteSaida;
-import br.recife.edu.ifpe.model.classes.Produto;
-import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
 import br.recife.edu.ifpe.model.repositorios.RepositorioFuncionario;
-import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,8 +49,7 @@ public class FuncionarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         
         if(atualizarFuncionario == null){
-            RepositorioFuncionario.getCurrentInstance().create(f);
-
+            
             LoteSaida ls = new LoteSaida();
             ls.setCodigo(f.getCodigo());
             ls.setResponsavel(f);            
