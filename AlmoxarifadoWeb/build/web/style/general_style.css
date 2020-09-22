@@ -1,12 +1,217 @@
+/* Geral */
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    background: linear-gradient(to right, #C8C9CD, #EDEDED);
+}
+
+
+a{
+    text-decoration: none;
+}
+
 .icon{
     margin-right: 15px;
     margin-left: 15px
 }
 
-.modal{
-    background-color: pink;
+/* Cabeçalho */
+.cabecalho{
+    width:100%;
+    float: left;    
+    padding: 25px 8%;
+    background-color: #FF8C00;
+}
+
+
+.logo a{
+    font-size: 0;
+}
+
+.logo img{
+    width: 250px;
+    height: 100px;
+    display: block;
+    margin: auto;
+}
+
+
+/* Menu */
+.menu{
+    width:100%;
+    float: left;
+    background-color: #111;
+    padding: 18px 8%;
+}
+
+.menu li{
+    float:left;
+}
+
+.menu li a{
+    color: #9D9D9D;
+    padding-right: 25px;
+}
+.menu li a:hover{
+    color: #FF8C00;
+}
+/* Titulo principal */
+.titulo-principal{
+    font-size: 40px;
+    text-align: center;
+}
+
+/* Mensagem de eventos */
+.mensagem{
+    font-size: 20px;
+    text-align: center;
+    color: #FF8C00;
+}
+
+
+/* Botão */
+.btn{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 15%;
+    float: left;
+    padding: 5px 10px;
+    background-color: #FF8C00;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50px;
+    margin: 5px;
+}
+
+
+/* Tabela */
+.tabela{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabela td, .tabela th {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabela tr:nth-child(even){background-color: #f2f2f2;}
+
+.tabela tr:hover {background-color: #FF991C;}
+
+.tabela th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #111;
+    color: #9D9D9D;
+}
+
+.tabela a{
+    color: #111;
+}
+
+/* Tabela interna */
+.div-tabela-interna{
+    padding: 0px 20px 30px 20px;
+}
+
+.tabela-interna{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tabela-interna td, .tabela-interna th {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabela-interna tr{
+    background-color: #f2f2f2;
+}
+
+.tabela-interna th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background: linear-gradient(to right, #C8C9CD, #EDEDED);
+    color: #111;
+}
+
+.tabela-interna a{
+    color: #111;
+}
+
+/* Modal */
+.modal-css{
+    background-color: #FF8C00;
     position: absolute;
-    top: 200px;
-    left: 200px;
+    top: 40%;
+    left: 40%;
     border: 1px black solid;
+    border-radius: 20px;
+}
+
+/* Titulo modal */
+.titulo-interno{
+    padding: 10px 20px 0px 20px;
+    text-align: center;
+    font-size: 30px;
+}
+
+/* Botão de fechar */
+.btn-close{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 15%;
+    float: right;
+    padding: 5px 10px;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+/* Botão de confirmação */
+.btn-ok{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 25%;
+    float: left;
+    padding: 5px 10px;
+    background-color: #111;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+/* Form de entrada (Cadastro e atualziação) */
+
+.form-entrada label{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 20px 20px 10px 50px;  
+}
+
+.form-entrada input[type="text"]{
+    margin: 5px 20px 10px 50px; 
+    border-radius: 5px;
+}
+
+.form-entrada textarea{
+    margin: 5px 20px 10px 50px; 
+    border-radius: 5px;
 }

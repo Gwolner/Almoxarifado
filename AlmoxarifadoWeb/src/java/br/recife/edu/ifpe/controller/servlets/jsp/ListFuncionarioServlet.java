@@ -3,7 +3,6 @@ package br.recife.edu.ifpe.controller.servlets.jsp;
 import br.recife.edu.ifpe.model.classes.Funcionario;
 import br.recife.edu.ifpe.model.repositorios.RepositorioFuncionario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +19,7 @@ public class ListFuncionarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //Lista funcionários cadastrados e devolve a resposta na sessão
+        //Lista os funcionários cadastrados e devolve a resposta na sessão
         List<Funcionario> funcionarios = RepositorioFuncionario.getCurrentInstance().readAll();
         
         HttpSession session = request.getSession();

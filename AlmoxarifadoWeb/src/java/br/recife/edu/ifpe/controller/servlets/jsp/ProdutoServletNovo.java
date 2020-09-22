@@ -87,6 +87,7 @@ public class ProdutoServletNovo extends HttpServlet {
         session.setAttribute("msg", "O produto "+p.getNome()+" foi deletado!");
         
         RepositorioProdutos.getCurrentInstance().delete(p);
+        
     }
 
     

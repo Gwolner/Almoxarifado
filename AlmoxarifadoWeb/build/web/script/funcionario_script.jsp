@@ -4,40 +4,43 @@
     <body>
         <script>
             
-            var modalFuncionario = document.getElementById("modalFuncionario");
-            
-            
-            
-            var modalFuncionario2 = document.getElementById("modalFuncionario2");
+            var modal = document.getElementById("modal");
+                      
+            var modal2 = document.getElementById("modal2");
             
             <%
             String redirect = request.getParameter("redirect");
             
             if(redirect == null){
             %>
-                document.body.removeChild(modalFuncionario);
-                document.body.removeChild(modalFuncionario2);
+                document.body.removeChild(modal);
+                document.body.removeChild(modal2);
                 
             <% }else if(redirect.equals("visualiza")){ %>
                 
-                document.body.removeChild(modalFuncionario);
+                document.body.removeChild(modal);
+            
+             <% }else if(redirect.equals("atualiza")){ %>
                 
+                document.body.removeChild(modal2);    
+    
             <% }else{ %>
                 
-                document.body.removeChild(modalFuncionario2); 
+                document.body.removeChild(modal);
+                document.body.removeChild(modal2); 
                 
             <% } %>
             
             function modalclose(){
-                document.body.removeChild(modalFuncionario);
+                document.body.removeChild(modal);
             }
             
             function modal2close(){
-                document.body.removeChild(modalFuncionario2);
+                document.body.removeChild(modal2);
             }
             
             function modalopen(){
-                document.body.appendChild(modalFuncionario);
+                document.body.appendChild(modal);
             }
             
             function deleteFuncionario(codigo){                
