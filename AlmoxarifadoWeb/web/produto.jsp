@@ -39,9 +39,11 @@
             <!--<br>-->            
         </div>
 
-        <%            List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
+        <%  
+            List<Produto> produtos = RepositorioProdutos.getCurrentInstance().readAll();
+            if (produtos.size() != 0) {
         %>
-
+        
         <table class="tabela" border="1">
             <tr>
                 <th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Operações</th>
@@ -64,7 +66,13 @@
                 }
             %>
         </table>
-
+        <%
+            }else{
+                out.println("<h2 class='no-table'> Nenhum cadastro realizado até o momento. </h2>");
+            }
+        %>
+        
+        
         <script>
 
             var modal = document.getElementById("modal");

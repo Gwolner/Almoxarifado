@@ -19,7 +19,9 @@
             String mensagem = (String) session.getAttribute("msg");
             if (mensagem != null) {
         %>
+
         <h2 class="mensagem"> <%= mensagem%> </h2>
+
         <%
                 session.removeAttribute("msg");
             }
@@ -34,23 +36,18 @@
         <button class="btn" onclick="modalopen()">Novo funcionário</button>
 
         <div id="modal" class="modal-css">
-
             <%@include file="cadastrofuncionario.jsp"%>
-
-            <!--<br>-->
-            <!--<button onclick="modalclose()">Fechar</button>-->
         </div>
 
         <div id="modal2" class="modal-css">
-
             <%@include file="visualizafuncionario.jsp"%>
-
-            <!--<br>-->
-            <!--<button onclick="modal2close()">Fechar</button>-->
         </div>
 
-        <% //Esta responsabilidade passou a ser do servlet e não mais do front.
+        <%  //Esta abaixo responsabilidade passou a ser do servlet e não mais do front.
             //List<Funcionario> funcionarios = RepositorioFuncionario.getCurrentInstance().readAll();
+            
+            //Apenas exibe a tabela se houver funcionário cadastrado
+            if(listaDeFuncionarios!= null && listaDeFuncionarios.size() != 0) {
         %>
 
         <table class="tabela" border="1">
@@ -58,9 +55,8 @@
                 <th>Código</th><th>Nome</th><th>Departamento</th><th>Operações</th>
             </tr>
 
-            <% //Aénas exibe a tabela se houver funcionário cadastrado
-                if (listaDeFuncionarios != null) {
-                    for (Funcionario f : listaDeFuncionarios) {
+            <%
+                for (Funcionario f : listaDeFuncionarios) {
             %>
             <tr>
                 <td><%= f.getCodigo()%></td>
@@ -72,11 +68,15 @@
                 </td>
             </tr>
             <%
-                    }
                 }
             %>
         </table>
-
+        <%
+            //Exibe mensagem caso não haja itens cadastrados
+            } else {
+                out.println("<h2 class='no-table'> Nenhum cadastro realizado até o momento. </h2>");
+            }
+        %>
 
         <!--Este include substitui o <script> para que se separem as responsabilidades de frontend.
         Como não foi possivel importar um arquivo .js pois ele não suporta as tags JSP, decidi

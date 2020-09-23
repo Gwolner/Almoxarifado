@@ -22,6 +22,22 @@ a{
     margin-left: 15px
 }
 
+/* Aviso de Manutenção do sistema */ 
+
+#manutencao img{
+    width: 500px;
+    height: 350px;
+    display: block;
+    margin: auto;
+}
+
+#manutencao h1{
+    width: 400px;
+    /*height: 350px;*/
+    /*display: block;*/
+    margin: auto;
+}
+
 /* Cabeçalho */
 .cabecalho{
     width:100%;
@@ -90,7 +106,7 @@ a{
 }
 
 
-/* Tabela */
+/* Tabela de itens cadastrados*/
 .tabela{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -119,6 +135,15 @@ a{
 .tabela a{
     color: #111;
 }
+
+/* Ausencia de tabela */ 
+.no-table{
+    margin-top: 150px;
+    font-size: 20px;
+    text-align: center;
+    color: #FF8C00;
+}
+
 
 /* Tabela interna */
 .div-tabela-interna{
@@ -207,6 +232,11 @@ a{
 }
 
 .form-entrada input[type="text"]{
+    margin: 5px 20px 10px 50px; 
+    border-radius: 5px;
+}
+
+.form-entrada input[type="number"]{
     margin: 5px 20px 10px 50px; 
     border-radius: 5px;
 }

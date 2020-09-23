@@ -7,14 +7,15 @@
         <title>1ª entrega</title>
     </head>
     <body>
-        <h1 class="titulo-interno">Cadastro de produtos</h1>
+        <h1 class="titulo-interno">${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualização':'Cadastro'} de produto</h1>
 
         <a href="produto.jsp?redirect=fecha"><button class="btn-close" onclick="modalclose()"><i class="fa fa-times" aria-hidden="true"></i></button></a><br><br>
 
         <form class="form-entrada" method="post" action="ProdutoServletNovo">
 
             <label>Código: </label><br>
-            <input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:""}"><br>
+            <input required type="number" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.codigo:""}" ${(param.redirect != null && param["redirect"] eq 'atualiza')?'readonly':''}><br>
+            
             <label>Nome: </label><br>
             <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?produto.nome:''}"><br>
             <label>Marca: </label><br>
@@ -26,7 +27,7 @@
 
             <input type="hidden" name="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}" value="1">         
 
-            <input  class="btn-ok" type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}">
+            <input  class="btn-ok" type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualizar':'Cadastrar'}">
         </form> 
     </body>
 </html>

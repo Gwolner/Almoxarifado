@@ -38,6 +38,8 @@ public class ProdutoServletNovo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        
         int codigo = Integer.parseInt(request.getParameter("codigo"));
         String nome = request.getParameter("nome");
         String marca = request.getParameter("marca");
@@ -48,15 +50,15 @@ public class ProdutoServletNovo extends HttpServlet {
         
         Produto p = new Produto();
         
+        Produto prodAux = RepositorioProdutos.getCurrentInstance().read(codigo);
+                
         p.setCodigo(codigo);
         p.setNome(nome);
         p.setMarca(marca);
         p.setCategoria(categoria);
         p.setDescricao(descricao);
         
-        HttpSession session = request.getSession();
-        
-        if(a == null){
+        if(a == null && prodAux == null){
             RepositorioProdutos.getCurrentInstance().create(p);
 
             ItemEstoque item = new ItemEstoque();
@@ -67,11 +69,14 @@ public class ProdutoServletNovo extends HttpServlet {
             RepositorioEstoque.getCurrentInstance().read().addItem(item);
 
             session.setAttribute("msg", "Produto " + p.getNome() + " cadastrado com sucesso!");
-        }else{
+        }else if(a != null){
             RepositorioProdutos.getCurrentInstance().update(p);
         
             session.setAttribute("msg", "Produto " + p.getNome() + " atualizado com sucesso!");
-        }
+        }else{
+            session.setAttribute("msg", "Código " + p.getCodigo() + " já está cadastrado!");
+        }     
+        
         response.sendRedirect("produto.jsp");
     }
 

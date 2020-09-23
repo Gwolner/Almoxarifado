@@ -7,22 +7,25 @@
         <title>1ª entrega</title>
     </head>
     <body>
-        <h1 class="titulo-interno">Cadastro de funcionários</h1>        
+        <h1 class="titulo-interno">${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualização':'Cadastro'} de funcionário</h1>        
 
         <a href="funcionario.jsp?redirect=fecha"><button class="btn-close" onclick="modalclose()"><i class="fa fa-times" aria-hidden="true"></i></button></a><br><br>
 
         <form class="form-entrada" method="post" action="FuncionarioServlet">
 
+            <!--Aceita apenas números e também se torna apenas de leitura (readonly) durante edição de campos-->
             <label>Código: </label><br>
-            <input type="text" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:""}"><br>
+            <input required type="number" name="codigo" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.codigo:""}" ${(param.redirect != null && param["redirect"] eq 'atualiza')?'readonly':''}><br>
+            
             <label>Nome: </label><br>
             <input type="text" name="nome" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.nome:''}"><br>
             <label>Departamento: </label><br>
             <input type="text" name="departamento" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?funcionario.departamento:''}"><br>
 
             <input type="hidden" name="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}" value="1">         
-
-            <input class="btn-ok" type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'atualizar':'cadastrar'}">
+            
+            <!--Só da submit se o campo Código for preenchido-->
+            <input class="btn-ok" type="submit" value="${(param.redirect != null && param["redirect"] eq 'atualiza')?'Atualizar':'Cadastrar'}">
 
         </form> 
     </body>

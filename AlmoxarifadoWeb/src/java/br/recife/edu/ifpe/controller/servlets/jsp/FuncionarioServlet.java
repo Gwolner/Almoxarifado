@@ -34,6 +34,8 @@ public class FuncionarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        
         int codigo = Integer.parseInt(request.getParameter("codigo"));
         String nome = request.getParameter("nome");
         String departamento = request.getParameter("departamento");
@@ -42,13 +44,14 @@ public class FuncionarioServlet extends HttpServlet {
         
         Funcionario f = new Funcionario();
         
+        //Verifica se ja existe o código cadastrado no sistema
+        Funcionario funcAux = RepositorioFuncionario.getCurrentInstance().read(codigo);
+
         f.setCodigo(codigo);
         f.setNome(nome);
         f.setDepartamento(departamento);
-        
-        HttpSession session = request.getSession();
-        
-        if(atualizarFuncionario == null){
+                
+      if(atualizarFuncionario == null && funcAux == null){
             
             LoteSaida ls = new LoteSaida();
             ls.setCodigo(f.getCodigo());
@@ -57,11 +60,14 @@ public class FuncionarioServlet extends HttpServlet {
             RepositorioFuncionario.getCurrentInstance().create(f);
 
             session.setAttribute("msg", "Funcionário " + f.getNome() + " cadastrado com sucesso!");
-        }else{
+        }else if(atualizarFuncionario != null){
             RepositorioFuncionario.getCurrentInstance().update(f);
         
             session.setAttribute("msg", "Funcionário " + f.getNome() + " atualizado com sucesso!");
-        }
+        }else{
+            session.setAttribute("msg", "Código " + f.getCodigo() + " já está cadastrado!");
+        }        
+        
         response.sendRedirect("funcionario.jsp");
         
     }
