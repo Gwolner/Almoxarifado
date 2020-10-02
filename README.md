@@ -74,6 +74,23 @@ O JSP possui objetos implícitos (que não precisam de uma declaração formal),
 Obtendo parâmetros da requisição <br>
 `String param = request.getParameter("nome_parametro");`
 
+Sessão: existe uma sessão por navegador e não por usuario.
+`HttpSession session = request.getSession(); //Retorna a sessão que existe. Se não existir, cria uma nova.
+HttpSession session = request.getSession(false); //Retorna a sessão que existe, aso não exista laça uma excessão.
+
+session.isNew(); //Verifica se a sessão é nova.
+
+session.setAttribute("chave","valor");
+
+sessiom.getAttribute("chave");
+`
+
+# Redirecionamento
+
+`response.sendRedirect("pagina.jsp");`
+
+
+
 
 ## Playlist das aulas
 
