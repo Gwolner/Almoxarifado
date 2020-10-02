@@ -19,5 +19,61 @@ Inicialmente o servlet é usado so pra tratar requisição Get e Post, porém o 
 O método proccessRequest é usado para atender a qualquer tipo de requisição que apareça, tanto get quanto post, mas não faz mais sentido nos dias atuais, pois dessa forma, so get e post, era criado um servlet pra tudo (servlet de cadastro, servlet de alteração, servlet de deleção) e isto não faz sentido, pois deve-se usar as palavras do http.
 
 
+## Java Server Pages - JSP
+
+Página web que permite a inserção de código Java, sendo constituida de um conjunto de Diretivas e Scriptings.
+
+* **Diretivas** são usadas para configurar a página, incluir recursos externos ou referenciar bibliotecas de tags;
+
+  * Page: Configura a página.
+```jsp
+<%@page atributo="valor"%>
+```
+
+  * Include: Adiciona conteudo externo à página.
+```jsp
+<%@include file="pagina"%>
+```
+
+  * taglib
+```jsp
+ //ADICIONAR
+```
+
+* **Scriptings** é usado para escrever código java.
+
+  * Declaração: declara e/ou inicializa variável e método na página.
+```jsp
+<%! int a = 0 &>
+```
+
+  * Scriplet: realiza programação na página. Tambem inicializa e declara variável.
+```jsp
+<% if(a>10){ e = 2} %>
+```
+
+  * Expressão: usada pra imprimir no HTML o valro de um cálculo ou valores de variáveis.
+```jsp
+<% a+20 %>
+```
+
+  * Comentário: inseri um comentário no código, porém, diferente do HTML, não é enviado para o usuário.
+```jsp
+<%!-- texto --%>
+```
+
+### Objetos implícitos
+
+O JSP possui objetos implícitos (que não precisam de uma declaração formal), podendo ser usado livremente.
+(request, response, session, page, out, exception, application, pageContext)
+
+
+
+## Linhas de códigos usuais
+
+Obtendo parâmetros da requisição <br>
+`String param = request.getParameter("nome_parametro");`
+
+
 ## Playlist das aulas
 
