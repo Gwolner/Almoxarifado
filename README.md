@@ -100,3 +100,4 @@ response.sendRedirect("pagina.jsp");`
 
 ## Playlist das aulas
 
+Canal do professor [Eduardo de Melo Vasconcelos](https://www.youtube.com/playlist?list=PLXEnrSaX5MYCvZBMyc4181QdTKctzig8P)
