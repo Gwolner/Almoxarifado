@@ -73,6 +73,9 @@ O JSP possui objetos implícitos (que não precisam de uma declaração formal),
 ## TagLib - Tags customizadas 
 //Atualizar
 
+## JSTL : conjunto de tags criadas por uma empresa que as disponibilizou para uso.
+//Atualizar
+
 ## Linhas de códigos usuais
 
 Obtendo parâmetros da requisição <br>
