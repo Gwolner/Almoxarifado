@@ -35,9 +35,9 @@ Página web que permite a inserção de código Java, sendo constituida de um co
 <%@include file="pagina"%>
 ```
 
-  * taglib
+  * Taglib: Tags customizadas
 ```jsp
- //ADICIONAR
+ <jsp:include page="cadastroproduto.jsp"/>
 ```
 
 * **Scriptings** é usado para escrever código java.
@@ -67,7 +67,11 @@ Página web que permite a inserção de código Java, sendo constituida de um co
 O JSP possui objetos implícitos (que não precisam de uma declaração formal), podendo ser usado livremente.
 (request, response, session, page, out, exception, application, pageContext)
 
+## Expression Language - EL
+//Atualizar
 
+## TagLib - Tags customizadas 
+//Atualizar
 
 ## Linhas de códigos usuais
 
