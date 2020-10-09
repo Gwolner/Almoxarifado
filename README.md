@@ -71,8 +71,39 @@ O JSP possui objetos implícitos (que não precisam de uma declaração formal),
 //Atualizar
 
 ## TagLib - Tags customizadas 
-//Atualizar
 
+1 - Criar um pacote controller e dentro dele adicionar uma classe;<br>
+
+2 - Esta classe deve extender `SimpleTagSupport`;<br>
+
+3 - Sobreescreva o método doTag com o seguinte escopo: <br> 
+    `getJspContext().getOut().write("<h1>Hello World</h1>");`<br>
+    
+4 - Dentro de WEB-INF crie um arquivo XML `Descritor da Biblioteca de Tag`. Se não houver essa opção, procure em Outros > Web;
+
+5 - No XML, mude o nome dentro da tag uri se desejar: <br>
+    `<uri>nome.dentro.da.tag.uri</uri>`<br>
+    
+6 - Ainda no XML, crie o seguinte snippet abaixo da tag uri: <br>
+
+```xml
+<tag>
+    <name>nome_qualquer</name>
+    <body-content>empty</body-content>
+    <tag-class>nome.do.pacote.e.da.classe</tag-class>
+</tag>
+```
+
+7 - Na página que for utilizar a taglib, importe e declare um prefixo para ela: <br>
+    `<%@taglib prefix="nome_prefixo" uri="nome.dentro.da.tag.uri" %>` <br>
+    
+8 - Na parte da página que decidir utilizar a taglib, use a seguinte chaamda: <br>
+    `<nome_prefixo:nome_qualquer/>`
+
+    
+    
+    
+    
 ## JSTL : conjunto de tags criadas por uma empresa que as disponibilizou para uso.
 //Atualizar
 
