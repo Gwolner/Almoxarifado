@@ -72,6 +72,8 @@ O JSP possui objetos implícitos (que não precisam de uma declaração formal),
 
 ## TagLib - Tags customizadas 
 
+* **Tag customizada simples**
+
 1 - Criar um pacote controller e dentro dele adicionar uma classe;<br>
 
 2 - Esta classe deve extender `SimpleTagSupport`;<br>
