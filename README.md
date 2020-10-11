@@ -101,13 +101,13 @@ O JSP possui objetos implícitos (que não precisam de uma declaração formal),
     
 8 - Na parte da página que decidir utilizar a taglib, use a seguinte chaamda: <br>
     `<nome_prefixo:nome_qualquer/>`
+ 
+    
+## JSTL : JavaServer pages Standard Template Library)
 
-    
-    
-    
-    
-## JSTL : conjunto de tags criadas por uma empresa que as disponibilizou para uso.
-//Atualizar
+É um framework desenvolvido todo com o conceito de taglib e que contem muitas funcionalidades básicas que podemos usar no desenvolviemnto das aplciações.
+A ideia é que JSTL tenha tudo que precisamos pra desenvolver um sitema. É claro, só possui as bibliotecas básicas, os comandos basicos para desenvolver sem usar os scriptless, porém não nos fornece "recursos ricos". Um exemplo de framework que forneceria essses recursos ricos seria o JSF.
+
 
 ## Linhas de códigos usuais
 
