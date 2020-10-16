@@ -21,9 +21,14 @@
         </header>
         <nav class="menu">
             <ul>
-                <li><a href="produto.jsp"><i class="fa fa-truck" aria-hidden="true"></i> Produtos</a></li>
+                <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                 <li><a href="funcionario.jsp"><i class="fa fa-user" aria-hidden="true"></i> Funcionários</a></li>
-                 <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a href="produto.jsp"><i class="fa fa-truck" aria-hidden="true"></i> Produtos</a></li>
+                <li><a href="loteentrada.jsp"><i class="fa fa-plus" aria-hidden="true"></i> Lote de entrada</a></li>
+                <li><a href="lotesaida.jsp"><i class="fa fa-plus" aria-hidden="true"></i> Lote de saída</a></li>
+                <li><a href="loteentradaapresentacao.jsp"><i class="fa fa-list-ol" aria-hidden="true"></i> Lotes inseridos</a></li>
+                <li><a href="lotesaidaapresentacao.jsp"><i class="fa fa-list-ol" aria-hidden="true"></i> Lotes removidos</a></li>
+                <li><a href="estoque.jsp"><i class="fa fa-th" aria-hidden="true"></i> Estoque</a></li> 
             </ul>
         </nav>
     </body>

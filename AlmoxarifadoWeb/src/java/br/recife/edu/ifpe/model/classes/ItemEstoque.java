@@ -36,5 +36,12 @@ public class ItemEstoque {
         this.quantidade = quantidade;
     }
     
+    public void adiciona(int quantidade) {
+        this.quantidade += quantidade;
+    }
+    
+    public void subtrai(int quantidade) {
+        this.quantidade -= quantidade;
+    }
     
 }
