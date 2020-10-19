@@ -56,18 +56,24 @@ public class LoteSaidaServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         LoteSaida ls = (LoteSaida) session.getAttribute("loteSaida");
+        
+        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
 
         for (ItemSaida i : ls.getItens()) {
-            if (i.getQuantidade() > 10) {
-                session.setAttribute("msg", "VocÊ está tentando inserir mais de 10 itens no produto " + i.getProduto().getNome() + " no seu lote.");
+            for (ItemEstoque ie : estoque.getItens()) {
+                if (i.getProduto() == ie.getProduto()) {
+                    if (i.getQuantidade() > ie.getQuantidade()) {
+                        session.setAttribute("msg", "Não é possível remover mais do que há no estoque." + i.getProduto().getNome() + " no seu lote.");
 
-                response.sendError(500);
+                        response.sendError(500);
 
-                return;
+                        return;
+                    }
+                }
             }
         }
 
-        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
+//        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
 
         for (ItemSaida i : ls.getItens()) {
             for (ItemEstoque ie : estoque.getItens()) {
