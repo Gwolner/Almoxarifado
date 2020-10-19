@@ -1,9 +1,3 @@
-<%-- 
-    Document   : template_menu
-    Created on : 21/09/2020, 15:19:04
-    Author     : wolner
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,10 +19,11 @@
                 <li><a href="funcionario.jsp"><i class="fa fa-user" aria-hidden="true"></i> Funcionários</a></li>
                 <li><a href="produto.jsp"><i class="fa fa-truck" aria-hidden="true"></i> Produtos</a></li>
                 <li><a href="loteentrada.jsp"><i class="fa fa-plus" aria-hidden="true"></i> Lote de entrada</a></li>
-                <li><a href="lotesaida.jsp"><i class="fa fa-plus" aria-hidden="true"></i> Lote de saída</a></li>
+                <li><a href="lotesaida.jsp"><i class="fa fa-minus" aria-hidden="true"></i> Lote de saída</a></li>
                 <li><a href="loteentradaapresentacao.jsp"><i class="fa fa-list-ol" aria-hidden="true"></i> Lotes inseridos</a></li>
                 <li><a href="lotesaidaapresentacao.jsp"><i class="fa fa-list-ol" aria-hidden="true"></i> Lotes removidos</a></li>
                 <li><a href="estoque.jsp"><i class="fa fa-th" aria-hidden="true"></i> Estoque</a></li> 
+                <li><a href="relatorio.jsp"><i class="fa fa-file-text-o" aria-hidden="true"></i> Relatório</a></li> 
             </ul>
         </nav>
     </body>

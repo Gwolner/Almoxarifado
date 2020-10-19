@@ -64,7 +64,7 @@ a{
     width:100%;
     float: left;
     background-color: #111;
-    padding: 18px 8%;
+    padding: 18px 6%;
 }
 
 .menu li{
@@ -78,6 +78,8 @@ a{
 .menu li a:hover{
     color: #FF8C00;
 }
+
+
 /* Titulo principal */
 .titulo-principal{
     font-size: 40px;
