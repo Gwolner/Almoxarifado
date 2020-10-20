@@ -5,15 +5,20 @@
  */
 package br.recife.edu.ifpe.model.classes;
 
+import br.recife.edu.ifpe.model.interfaces.Lote;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LoteEntrada {
+public class LoteEntrada implements Lote{
     
     private int codigo;
     private List<ItemEntrada> itens;
     private Date data;
+    
+//    Adicionado atributo responsavel no lote de ntrada para permitir a identificação no relatorio
+    private Funcionario responsavel; 
+    
     /*
     * Neste campo ficarão armazenadas as informações de documentos
     */
@@ -24,10 +29,12 @@ public class LoteEntrada {
         this.data = new Date();
     }
 
+    @Override
     public int getCodigo() {
         return codigo;
     }
 
+    @Override
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -40,10 +47,12 @@ public class LoteEntrada {
         this.itens = itens;
     }
 
+    @Override
     public Date getData() {
         return data;
     }
 
+    @Override
     public void setData(Date data) {
         this.data = data;
     }
@@ -69,4 +78,15 @@ public class LoteEntrada {
         
         return quant;
     }
+    
+//    Adicionado Get e Set para Funcionário/Responsavel
+    public Funcionario getResponsavel() {
+        return responsavel;
+    }
+
+    public void setResponsavel(Funcionario responsavel) {
+        this.responsavel = responsavel;
+    }
+    
+    
 }

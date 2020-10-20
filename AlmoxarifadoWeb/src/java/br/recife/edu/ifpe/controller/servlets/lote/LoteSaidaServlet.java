@@ -61,7 +61,11 @@ public class LoteSaidaServlet extends HttpServlet {
 
         for (ItemSaida i : ls.getItens()) {
             for (ItemEstoque ie : estoque.getItens()) {
+                
+//              Adicionado mais um IF pra verificar compatibilidade de produtos (manipulado VS estoque)
                 if (i.getProduto() == ie.getProduto()) {
+                    
+//              Se for o mesmo produto, compara se a quantidade subtraida é menor que o que há em estoque)
                     if (i.getQuantidade() > ie.getQuantidade()) {
                         session.setAttribute("msg", "Não é possível remover mais do que há no estoque." + i.getProduto().getNome() + " no seu lote.");
 

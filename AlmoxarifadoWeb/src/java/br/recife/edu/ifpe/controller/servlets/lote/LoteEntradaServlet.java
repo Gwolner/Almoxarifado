@@ -5,9 +5,11 @@ import br.recife.edu.ifpe.model.classes.ItemEntrada;
 import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.LoteEntrada;
 import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.classes.Relatorio;
 import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
 import br.recife.edu.ifpe.model.repositorios.RepositorioLoteEntrada;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
+import br.recife.edu.ifpe.model.repositorios.RepositorioRelatorio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -55,22 +57,33 @@ public class LoteEntradaServlet extends HttpServlet {
 
         LoteEntrada le = (LoteEntrada) session.getAttribute("loteEntrada");
 
-        for (ItemEntrada i : le.getItens()) {
-            if (i.getQuantidade() > 10) {
-                session.setAttribute("msg", "VocÊ está tentando inserir mais de 10 itens no produto " + i.getProduto().getNome() + " no seu lote.");
-
-                response.sendError(500);
-
-                return;
-            }
-        }
+//        Removida lógica de numero total de itens na entrada
+        
+//        for (ItemEntrada i : le.getItens()) {
+//            if (i.getQuantidade() > ) {
+//                session.setAttribute("msg", "VocÊ está tentando inserir mais de 10 itens no produto " + i.getProduto().getNome() + " no seu lote.");
+//
+//                response.sendError(500);
+//
+//                return;
+//            }
+//        }
 
         Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
+        
+//        Invocando instância de Relatorio
+        Relatorio relatorio = RepositorioRelatorio.getCurrentInstance().read();
 
         for (ItemEntrada i : le.getItens()) {
             for (ItemEstoque ie : estoque.getItens()) {
                 if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
                     ie.adiciona(i.getQuantidade());
+                    
+//                    Relatorio adiciona o lote de entrada em sua List
+                    relatorio.addLote(le);
+                    
+//                    Objeto relatorio é adicionado na sessao
+                    session.setAttribute("relatorio", relatorio);
                     break;
                 }
             }

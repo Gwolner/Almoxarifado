@@ -5,11 +5,12 @@
  */
 package br.recife.edu.ifpe.model.classes;
 
+import br.recife.edu.ifpe.model.interfaces.Lote;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LoteSaida {
+public class LoteSaida implements Lote{
     
     private int codigo;
     private List<ItemSaida> itens;
@@ -26,10 +27,12 @@ public class LoteSaida {
         this.data = new Date();
     }
 
+    @Override
     public int getCodigo() {
         return codigo;
     }
 
+    @Override
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -42,10 +45,12 @@ public class LoteSaida {
         this.itens = itens;
     }
 
+    @Override
     public Date getData() {
         return data;
     }
 
+    @Override
     public void setData(Date data) {
         this.data = data;
     }

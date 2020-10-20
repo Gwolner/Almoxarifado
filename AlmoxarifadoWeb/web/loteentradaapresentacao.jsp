@@ -29,11 +29,11 @@
         <ifpe:carregaloteentrada/>
          
         <table border='1'>
-            <tr><th>Data</th><th>codigo</th><th>quantidade total</th><th>visualizar itens</th></tr>
+            <tr><th>Data/Hora</th><th>Codigo</th><th>Quant.Total</th><th>Visualizar itens</th></tr>
             <c:forEach var="item" items="${lotesEntradaInseridos}">
 
                 <tr>
-                    <td><fmt:formatDate value="${item.data}" type="date"/></td>
+                    <td><fmt:formatDate dateStyle="short" timeStyle="short" value="${item.data}" type="both"/></td>
                     <td>${item.codigo}</td>
                     <td>${item.quantidadeTotal}</td>
                     <td><a href='#' onclick="carregaItens(${item.codigo})">visualiza itens</a></td>
