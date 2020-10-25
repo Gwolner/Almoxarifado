@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//Passou a implementar a interface Lote
 public class LoteSaida implements Lote{
     
     private int codigo;

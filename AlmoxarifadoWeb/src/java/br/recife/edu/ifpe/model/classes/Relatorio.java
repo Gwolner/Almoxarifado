@@ -8,6 +8,8 @@ import java.util.List;
 public class Relatorio {   
     
    private int codigo;
+   
+   //Faz uso da interface Lote para que a lista possa receber tanto os lotes de entrada quanto os de saída
    private List<Lote> lotes;
    
    public Relatorio(){
@@ -22,6 +24,7 @@ public class Relatorio {
         this.codigo = codigo;
     }
 
+    //Métodos adaptados para interface Lote
     public List<Lote> getLotes() {
         return lotes;
     }

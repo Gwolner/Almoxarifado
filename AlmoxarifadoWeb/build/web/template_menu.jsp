@@ -15,7 +15,7 @@
         </header>
         <nav class="menu">
             <ul>
-                <li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <!--<li><a href="index.html"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>-->
                 <li><a href="funcionario.jsp"><i class="fa fa-user" aria-hidden="true"></i> Funcionários</a></li>
                 <li><a href="produto.jsp"><i class="fa fa-truck" aria-hidden="true"></i> Produtos</a></li>
                 <li><a href="loteentrada.jsp"><i class="fa fa-plus" aria-hidden="true"></i> Lote de entrada</a></li>

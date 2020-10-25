@@ -57,7 +57,7 @@ public class LoteEntradaServlet extends HttpServlet {
 
         LoteEntrada le = (LoteEntrada) session.getAttribute("loteEntrada");
 
-//        Removida lógica de numero total de itens na entrada
+        //Removida lógica de numero total de itens na entrada
         
 //        for (ItemEntrada i : le.getItens()) {
 //            if (i.getQuantidade() > ) {
@@ -71,23 +71,23 @@ public class LoteEntradaServlet extends HttpServlet {
 
         Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
         
-//        Invocando instância de Relatorio
+        //Invocando instância de Relatorio
         Relatorio relatorio = RepositorioRelatorio.getCurrentInstance().read();
 
         for (ItemEntrada i : le.getItens()) {
             for (ItemEstoque ie : estoque.getItens()) {
                 if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
                     ie.adiciona(i.getQuantidade());
-                    
-//                    Relatorio adiciona o lote de entrada em sua List
-                    relatorio.addLote(le);
-                    
-//                    Objeto relatorio é adicionado na sessao
-                    session.setAttribute("relatorio", relatorio);
                     break;
                 }
             }
         }
+        
+        //Relatorio adiciona o lote de entrada em sua List
+        relatorio.addLote(le);
+
+        //Objeto relatorio é adicionado na sessao
+//        session.setAttribute("relatorio", relatorio);
 
         RepositorioLoteEntrada.getCurrentInstance().create(le);
 

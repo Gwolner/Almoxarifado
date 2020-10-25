@@ -7,16 +7,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style/general_style.css">
+        <title>2ª entrega</title>
     </head>
     <body>
-        <h1>Produtos inseridos no Estoque</h1>
-        <a href="index.html">home</a><br/>
+        <%@include file="template_menu.jsp"%>
         
+        <h1 class="titulo-principal">Produtos em estoque</h1>
+
         <ifpe:carregaestoque/>
         
-        <table border="1">
-            <tr><td>Código</td><td>nome do produto</td><td>quantidade em estoque</td></tr>
+        <table class="tabela" border="1">
+            <tr><th>Código do produto</th><th>Nome do produto</th><th>Quant. em estoque</th></tr>
             
             <c:forEach var="item" items="${estoque.itens}">
                 <tr>

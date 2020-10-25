@@ -6,7 +6,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style/general_style.css">
+        <title>2ª entrega</title>
         <style>
             .plus{
                 font-size: 15pt;
@@ -16,11 +18,12 @@
             }
         </style>
     </head>
-    <body>
-        <h1>Cadastro de Lote de Saida</h1>
+    <body>        
+        <%@include file="template_menu.jsp"%>
+        
+        <h1 class="titulo-principal">Lote de saída</h1>
 
-        <a href="index.html">home</a><br/>
-        <h3><c:out value="${msg}"/></h3>
+        <h3 class="mensagem"><c:out value="${msg}"/></h3>
 
         <c:remove var="msg" scope="session"/>
 
@@ -29,7 +32,7 @@
 
         <h2>Produtos cadastrados</h2>
 
-        <table border="1">
+        <table class="tabela" border="1">
             <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Inserir</th></tr>
                     <c:forEach var="pAux" items="${produtos}">
                 <tr>
@@ -42,10 +45,10 @@
             </c:forEach>                
         </table>
  
-        <c:if test="${loteSaida != null}">
+        <c:if test="${loteSaida != null}"><br><br>
             <h2>Produtos inseridos no lote de saida</h2>
 
-            <table border="1">
+            <table class="tabela" border="1">
                 <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Quantidade</th><th>Inserir</th></tr>
                 <c:forEach var="i" items="${loteSaida.itens}">
                     <tr>
@@ -58,21 +61,25 @@
                             <a href="#" class="plus" onclick="adiciona(${i.produto.codigo})">+</a></td>
                     </tr>
                 </c:forEach>                
-            </table>
+            </table><br><br>
             
+            <!--Lista os possiveis responsáveis pela retirada do produto do estoque -->
             <h2>Responsável pela retirada</h2>
         
-            <table border="1">
+            <table class="tabela" border="1">
+                <tr><th>Código</th><th>Nome</th><th>Departamento</th><th>Responsabilizar</th></tr>
                 <c:forEach var="f" items="${funcionarios}">
                          <tr>
                             <td>${f.codigo}</td>
                             <td>${f.nome}</td>
-                            <td><a href="#" class="job" onclick="associarFuncionario(${f.codigo})">Responsabilizar</a></td>
+                            <td>${f.departamento}</td>
+                            <!--Chama método que associa o responsável ao produto-->
+                            <td><a href="#" class="job" onclick="associarFuncionario(${f.codigo})"><i class="fa fa-id-card-o" aria-hidden="true"></i></a></td>
                          </tr>
                 </c:forEach>            
             </table>
             
-            <button onclick="cadastrar()">Cadastrar</button>
+            <button class="btn" onclick="cadastrar()">Cadastrar</button>
         </c:if>
 
         <script>
@@ -104,6 +111,7 @@
                 });
             }
             
+//            Requisição assincrona para associar o funcionário ao produto
             function associarFuncionario(codigo) {
                 fetch("LoteSaidaServlet?operacao=neutra&codigo=" + codigo, {method: "put"})
                         .then(function () {

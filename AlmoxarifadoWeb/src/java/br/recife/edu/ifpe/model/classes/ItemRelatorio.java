@@ -1,5 +1,6 @@
 package br.recife.edu.ifpe.model.classes;
 
+//Baseado na classe ItemEstoque
 public class ItemRelatorio {
 
     private int codigo;

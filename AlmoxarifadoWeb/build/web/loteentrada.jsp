@@ -7,7 +7,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style/general_style.css">
+        <title>2ª entrega</title>
         <style>
             .plus{
                 font-size: 15pt;
@@ -18,10 +20,11 @@
         </style>
     </head>
     <body>
-        <h1>Cadastro de Lote de Entrada</h1>
+        <%@include file="template_menu.jsp"%>
         
-        <a href="index.html">home</a><br/>
-        <h3><c:out value="${msg}"/></h3>
+        <h1 class="titulo-principal">Lote de entrada</h1>
+        
+        <h3 class="mensagem"><c:out value="${msg}"/></h3>
         
         <c:remove var="msg" scope="session"/>
         
@@ -29,7 +32,7 @@
 
         <h2>Produtos cadastrados</h2>
 
-        <table border="1">
+        <table class="tabela" border="1">
             <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th><th>Inserir</th></tr>
                     <c:forEach var="pAux" items="${produtos}">
                 <tr>
@@ -42,10 +45,10 @@
             </c:forEach>
         </table>
 
-        <c:if test="${loteEntrada != null}">
+        <c:if test="${loteEntrada != null}"><br><br>
             <h2>Produtos inseridos no lote de entrada</h2>
 
-            <table border="1">
+            <table class="tabela" border="1">
                 <tr><th>Código</th><th>Nome</th><th>Marca</th><th>Categoria</th>
                     <th>Quantidade</th><th>Inserir</th></tr>
                         <c:forEach var="i" items="${loteEntrada.itens}">
@@ -60,7 +63,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <button onclick="cadastrar()">Cadastrar</button>
+            <button class="btn" onclick="cadastrar()">Cadastrar</button>
         </c:if>
 
         <script>

@@ -6,9 +6,11 @@ import br.recife.edu.ifpe.model.classes.ItemEstoque;
 import br.recife.edu.ifpe.model.classes.ItemSaida;
 import br.recife.edu.ifpe.model.classes.LoteSaida;
 import br.recife.edu.ifpe.model.classes.Produto;
+import br.recife.edu.ifpe.model.classes.Relatorio;
 import br.recife.edu.ifpe.model.repositorios.RepositorioEstoque;
 import br.recife.edu.ifpe.model.repositorios.RepositorioLoteSaida;
 import br.recife.edu.ifpe.model.repositorios.RepositorioProdutos;
+import br.recife.edu.ifpe.model.repositorios.RepositorioRelatorio;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -62,32 +64,40 @@ public class LoteSaidaServlet extends HttpServlet {
         for (ItemSaida i : ls.getItens()) {
             for (ItemEstoque ie : estoque.getItens()) {
                 
-//              Adicionado mais um IF pra verificar compatibilidade de produtos (manipulado VS estoque)
+                //Adicionado mais um IF pra verificar compatibilidade de produtos (manipulado VS estoque)
                 if (i.getProduto() == ie.getProduto()) {
                     
-//              Se for o mesmo produto, compara se a quantidade subtraida é menor que o que há em estoque)
+                    //Se for o mesmo produto, compara se a quantidade subtraida é menor que o que há em estoque)
                     if (i.getQuantidade() > ie.getQuantidade()) {
-                        session.setAttribute("msg", "Não é possível remover mais do que há no estoque." + i.getProduto().getNome() + " no seu lote.");
-
+                        session.setAttribute("msg", "Não é possível remover mais do que há no estoque.");
                         response.sendError(500);
-
                         return;
                     }
                 }
             }
         }
 
+        //Movido pra cima para poder ser usado na checagem de itens em estoque
 //        Estoque estoque = RepositorioEstoque.getCurrentInstance().read();
 
+        //Invocando instância de Relatorio
+        Relatorio relatorio = RepositorioRelatorio.getCurrentInstance().read();
+
         for (ItemSaida i : ls.getItens()) {
-            for (ItemEstoque ie : estoque.getItens()) {
-                if (i.getProduto().getCodigo() == ie.getProduto().getCodigo()) {
-                    ie.subtrai(i.getQuantidade());
+            for (ItemEstoque is : estoque.getItens()) {
+                if (i.getProduto().getCodigo() == is.getProduto().getCodigo()) {
+                    is.subtrai(i.getQuantidade());
                     break;
                 }
             }
         }
 
+        //Relatorio adiciona o lote de entrada em sua List
+        relatorio.addLote(ls);
+
+        //Objeto relatorio é adicionado na sessao
+//        session.setAttribute("relatorio", relatorio);
+        
         RepositorioLoteSaida.getCurrentInstance().create(ls);
 
         session.removeAttribute("loteSaida");
@@ -160,13 +170,18 @@ public class LoteSaidaServlet extends HttpServlet {
                     break;
                 }
             }
-        }
-        else if (operacao.equals("neutra")) {
+        }else if (operacao.equals("neutra")) { //ELSE IF adicionado para poder tratar o registro de funcionario responsável
             
+            //Busca todos os funcionários cadastrados
             List<Funcionario> listaDeFuncionarios = (List<Funcionario>) session.getAttribute("listaDeFuncionarios");
             
-            for (Funcionario f : listaDeFuncionarios) {
+            //Para cada funcionário, verifica qual corresponde ao código enviado na requisição
+            for (Funcionario f : listaDeFuncionarios) {       
+                
+                //Se algum for encontrado...
                 if (f.getCodigo() == codigo) {
+                    
+                    //...ele será adicionado ao lote de saida
                     ls.setResponsavel(f);                    
                     break;
                 }

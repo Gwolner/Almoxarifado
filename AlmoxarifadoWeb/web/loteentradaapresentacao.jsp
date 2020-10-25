@@ -8,35 +8,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style>
-            .modal{
-                position: absolute;
-                background: white;
-                top: 100px;
-                left: 100px;
-            }
-        </style>
+        <link rel="stylesheet" href="style/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style/general_style.css">
+        <title>2ª entrega</title>        
     </head>
     <body>
-        <h1>Lotes inseridos</h1>
+        <%@include file="template_menu.jsp"%>
+        
+        <h1 class="titulo-principal">Lotes inseridos</h1>
 
-        <a href="index.html">home</a><br/>
-
-        <h3><c:out value="${msg}"/></h3>
+        <h3 class="mensagem"><c:out value="${msg}"/></h3>
         <c:remove var="msg" scope="session"/>
 
         <ifpe:carregaloteentrada/>
          
-        <table border='1'>
-            <tr><th>Data/Hora</th><th>Codigo</th><th>Quant.Total</th><th>Visualizar itens</th></tr>
+        <table class="tabela" border='1'>
+            <tr><th>Data</th><th>Hora</th><th>Código</th><th>Quant.Total</th><th>Itens</th></tr>
             <c:forEach var="item" items="${lotesEntradaInseridos}">
 
                 <tr>
-                    <td><fmt:formatDate dateStyle="short" timeStyle="short" value="${item.data}" type="both"/></td>
+                    <td><fmt:formatDate dateStyle="short" timeStyle="short" value="${item.data}" type="date"/></td>
+                    <td><fmt:formatDate value="${item.data}" type="time"/></td>
                     <td>${item.codigo}</td>
                     <td>${item.quantidadeTotal}</td>
-                    <td><a href='#' onclick="carregaItens(${item.codigo})">visualiza itens</a></td>
+                    <td><a href='#' onclick="carregaItens(${item.codigo})"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                 </tr>
 
             </c:forEach>
@@ -53,17 +48,35 @@
                         let objeto = JSON.parse(text);
 
                         meuDiv = document.createElement("div");
-                        meuDiv.setAttribute("class", "modal");
+                        meuDiv.setAttribute("class", "modal-css");
 
                         document.body.appendChild(meuDiv);
 
-                        meuDiv.innerHTML = objeto.codigo + "<br>" + objeto.descricao + "<br>";
+//                        meuDiv.innerHTML = objeto.codigo + "<br>" + objeto.descricao + "<br>";
+                        meuDiv.innerHTML = "<br><br>";
 
                         let tabela = document.createElement("table");
                         tabela.setAttribute("border", "1");
+                        tabela.setAttribute("class", "tabela-interna");
 
                         meuDiv.appendChild(tabela);
-
+                        
+                        //Criando header da tabela                          
+                        let tr = document.createElement("tr");
+                        let th1 = document.createElement("th");
+                        th1.innerHTML = "Código";
+                        let th2 = document.createElement("th");
+                        th2.innerHTML = "Item";
+                        let th3 = document.createElement("th");
+                        th3.innerHTML = "Quant.";
+                        
+                        tr.appendChild(th1);
+                        tr.appendChild(th2);
+                        tr.appendChild(th3);
+                        
+                        tabela.appendChild(tr);
+                        //Fim do header da tabela
+                        
                         for (let i = 0; i < objeto.itens.length; i++) {
                             let tr = document.createElement("tr");
                             let td1 = document.createElement("td");
@@ -80,7 +93,8 @@
                         }
 
                         let botao = document.createElement("button");
-                        botao.appendChild(document.createTextNode("fechar"));
+                        botao.setAttribute("class", "btn-close");
+                        botao.appendChild(document.createTextNode("X"));
 
                         meuDiv.appendChild(botao);
 
